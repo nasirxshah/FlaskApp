@@ -1,8 +1,10 @@
-from flask_restful import Resource
-from .mongo import mongo
-from flask import request
-from werkzeug.security import generate_password_hash
 from bson import ObjectId
+from flask import request
+from flask_restful import Resource
+from werkzeug.security import generate_password_hash
+
+from app.extensions import mongo
+
 
 class UserList(Resource):
     def get(self):

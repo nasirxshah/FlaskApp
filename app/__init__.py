@@ -1,10 +1,19 @@
 from flask import Flask
-from .api import api
-from .api.mongo import mongo
 
-app = Flask(__name__)
+from app.api import api_bp
+from app.extensions import mongo
+from config import Config
 
-app.config['MONGO_URI'] = "mongodb://localhost:27017/test"
 
-mongo.init_app(app)
-api.init_app(app)
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    # add configurations
+    app.config.from_object(config_class)
+
+    # Initialize Flask extensions
+    mongo.init_app(app)
+
+    # Register blueprints
+    app.register_blueprint(api_bp)
+
+    return app
