@@ -1,5 +1,9 @@
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 class Config:
-    MONGO_URI = "mongodb://localhost:27017/flask"
+    MONGO_URI = os.environ.get('MONGODB_ENDPOINT')
     
